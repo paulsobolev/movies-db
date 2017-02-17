@@ -1,12 +1,26 @@
-import React, { Component } from 'react';
 import './App.css';
+import React from 'react';
+import {Container, Grid, Segment} from 'semantic-ui-react'
+import Header from '../Header'
+import Form from '../Form'
+import Movies from '../Movies'
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <h2>Movies</h2>
-      </div>
+      <Segment basic className="app">
+        <Header />
+        <Container fluid>
+          <Grid stackable centered>
+            <Grid.Column mobile={10} computer={6}>
+              <Form />
+            </Grid.Column>
+            <Grid.Column mobile={16} computer={10}>
+              <Movies />
+            </Grid.Column>
+          </Grid>
+        </Container>
+      </Segment>
     );
   }
 }
