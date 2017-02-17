@@ -8,3 +8,11 @@ export function generateYears(max = 100) {
 
   return yearOptions
 }
+
+export function changeOrderDirection(state, field) {
+    if (state && state === field) {
+      return '-' + field
+    }
+
+    return field
+}

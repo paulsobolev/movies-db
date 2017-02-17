@@ -1,9 +1,9 @@
-import './App.css';
-import React from 'react';
+import './App.css'
+import React from 'react'
 import {Container, Grid, Segment} from 'semantic-ui-react'
 import Header from '../Header'
 import Form from '../Form'
-import Movies from '../Movies'
+import Movies from '../../containers/Movies'
 
 class App extends React.Component {
   render() {
@@ -25,4 +25,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App

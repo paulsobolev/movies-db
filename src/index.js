@@ -1,12 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
-import './index.css';
+import './index.css'
 
-import App from './components/App';
+import App from './components/App'
 import configureStore from './store'
 
-const store = configureStore()
+import _movies from './_movies.json'
+const state = {
+  movies:  _movies.slice(0, 100),
+  orderBy: 'title'
+}
+
+const store = configureStore(state)
 
 ReactDOM.render(
   <Provider store={store}>
