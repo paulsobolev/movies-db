@@ -8,7 +8,7 @@ import configureStore from './store'
 
 import _movies from './_movies.json'
 const state = {
-  movies:  _movies.slice(0, 100),
+  movies:  _movies.slice(),
   orderBy: 'title'
 }
 

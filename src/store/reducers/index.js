@@ -32,8 +32,21 @@ function searchQuery(state = '', action) {
   }
 }
 
+function currentPage(state = 1, action) {
+  switch (action.type) {
+    case ActionTypes.SET_CURRENT_PAGE:
+      return action.page
+    case ActionTypes.SET_SEARCH_QUERY:
+      // Reset pagination on search
+      return 1
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   movies,
   orderBy,
-  searchQuery
+  searchQuery,
+  currentPage
 })

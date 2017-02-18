@@ -1,25 +1,35 @@
-import React from 'react'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import Movies from '../components/Movies'
-import {setOrderBy, setSearchQuery} from '../store/actions'
+import {setOrderBy, setSearchQuery, setCurrentPage} from '../store/actions'
 import {filterMoviesByQuery, orderMoviesBy} from '../utils'
 
+const pageSize = 20
+
 function mapStateToProps(state) {
-  const {movies, orderBy, searchQuery} = state
+  const {movies, orderBy, searchQuery, currentPage} = state
   const filteredMovies = filterMoviesByQuery(movies, searchQuery)
-  const orderedMovies = orderMoviesBy(filteredMovies.slice(0, 20), orderBy)
+  const orderedMovies = orderMoviesBy(filteredMovies, orderBy)
+  const lastPage = Math.ceil(orderedMovies.length / pageSize)
+  const startFrom = (currentPage - 1) * pageSize
 
   return {
-    movies:      orderedMovies,
-    orderBy:     orderBy,
-    searchQuery: searchQuery
+    movies:     orderedMovies.slice(startFrom, startFrom + pageSize),
+    pagination: {
+      currentPage,
+      lastPage,
+      pageSize
+    },
+    searchQuery,
+    orderBy
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    setOrderBy:     (field) => dispatch(setOrderBy(field)),
-    setSearchQuery: (query) => dispatch(setSearchQuery(query))
+    setOrderBy:     bindActionCreators(setOrderBy, dispatch),
+    setSearchQuery: bindActionCreators(setSearchQuery, dispatch),
+    setCurrentPage: bindActionCreators(setCurrentPage, dispatch)
   }
 }
 

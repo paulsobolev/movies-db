@@ -15,6 +15,13 @@ export function setSearchQuery(query) {
   }
 }
 
+export function setCurrentPage(page) {
+  return {
+    type: ActionTypes.SET_CURRENT_PAGE,
+    page
+  }
+}
+
 export function addVideo(data) {
   return {
     type: ActionTypes.ADD_MOVIE,

@@ -58,3 +58,26 @@ export function filterMoviesByQuery(movies, query) {
     })
   })
 }
+
+export function generatePaginationItems(currentPage, lastPage) {
+  let pages = []
+
+  for (let i = 1; i <= lastPage; i++) {
+    pages.push(i)
+  }
+
+  if (lastPage > 7) {
+    if (currentPage > 4) {
+      let remove = currentPage < lastPage - 3 ? pages.indexOf(currentPage - 2) : pages.indexOf(lastPage - 5)
+      pages.splice(pages.indexOf(2), remove, '...')
+    }
+
+    if (currentPage < lastPage - 3) {
+      let startFrom = pages.indexOf(currentPage < 5 ? 6 : currentPage + 2)
+      let remove = pages.indexOf(lastPage) - startFrom
+      pages.splice(startFrom, remove, '...')
+    }
+  }
+
+  return pages
+}
