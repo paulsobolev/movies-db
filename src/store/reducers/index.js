@@ -14,6 +14,15 @@ function movies(state = [], action) {
   }
 }
 
+function generatedMovies(state = {entries: [], enabled: false}, action) {
+  switch (action.type) {
+    case ActionTypes.TOGGLE_GENERATED_MOVIES:
+      return Object.assign({}, state, {enabled: !state.enabled})
+    default:
+      return state
+  }
+}
+
 function orderBy(state = 'title', action) {
   switch (action.type) {
     case ActionTypes.SET_ORDER_BY:
@@ -37,8 +46,8 @@ function currentPage(state = 1, action) {
     case ActionTypes.SET_CURRENT_PAGE:
       return action.page
     case ActionTypes.SET_SEARCH_QUERY:
-      // Reset pagination on search
-      return 1
+    case ActionTypes.TOGGLE_GENERATED_MOVIES:
+      return 1 // reset current page
     default:
       return state
   }
@@ -46,6 +55,7 @@ function currentPage(state = 1, action) {
 
 export default combineReducers({
   movies,
+  generatedMovies,
   orderBy,
   searchQuery,
   currentPage

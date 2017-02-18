@@ -1,24 +1,29 @@
 import React from 'react'
-import {Table, Input, Rating, Popup} from 'semantic-ui-react'
+import {Table, Input, Rating, Popup, Segment, Checkbox} from 'semantic-ui-react'
 import OrderLink from '../OrderLink'
 import Highlighter from '../Highlighter'
 import Pagination from '../Pagination'
 
 const propTypes = {
-  movies:         React.PropTypes.array.isRequired,
-  orderBy:        React.PropTypes.string.isRequired,
-  setOrderBy:     React.PropTypes.func.isRequired,
-  searchQuery:    React.PropTypes.string.isRequired,
-  pagination:     React.PropTypes.shape({
+  movies:                React.PropTypes.array.isRequired,
+  orderBy:               React.PropTypes.string.isRequired,
+  setOrderBy:            React.PropTypes.func.isRequired,
+  searchQuery:           React.PropTypes.string.isRequired,
+  pagination:            React.PropTypes.shape({
     currentPage: React.PropTypes.number.isRequired,
     lastPage:    React.PropTypes.number.isRequired,
     pageSize:    React.PropTypes.number.isRequired
   }),
-  setSearchQuery: React.PropTypes.func.isRequired,
-  setCurrentPage: React.PropTypes.func.isRequired
+  withGeneratedMovies:   React.PropTypes.bool,
+  setSearchQuery:        React.PropTypes.func.isRequired,
+  setCurrentPage:        React.PropTypes.func.isRequired,
+  toggleGeneratedMovies: React.PropTypes.func.isRequired
 }
 
-function Movies({movies = [], orderBy, setOrderBy, searchQuery, setSearchQuery, pagination, setCurrentPage, ...props}) {
+function Movies({
+  movies = [], orderBy, setOrderBy, searchQuery, setSearchQuery, pagination, setCurrentPage,
+  withGeneratedMovies, toggleGeneratedMovies, ...props
+}) {
   const SearchField = (
     <Input
       fluid
@@ -30,11 +35,19 @@ function Movies({movies = [], orderBy, setOrderBy, searchQuery, setSearchQuery, 
 
   return (
     <div {...props}>
-      <Table>
+      <Segment>
+        <Checkbox
+          toggle
+          label="Use preloaded data (1000 entries)"
+          checked={withGeneratedMovies}
+          onChange={toggleGeneratedMovies}
+        />
+      </Segment>
+      <Table compact>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan="2">Movies</Table.HeaderCell>
-            <Table.HeaderCell colSpan="2">
+            <Table.HeaderCell>Movies</Table.HeaderCell>
+            <Table.HeaderCell colSpan="3">
               <Popup
                 trigger={SearchField}
                 header='Movie Search'

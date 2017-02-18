@@ -28,3 +28,9 @@ export function addVideo(data) {
     data: Object.assign({}, data, {id: uuid()})
   }
 }
+
+export function toggleGeneratedMovies() {
+  return {
+    type: ActionTypes.TOGGLE_GENERATED_MOVIES
+  }
+}

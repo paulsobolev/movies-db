@@ -89,7 +89,6 @@ class MovieForm extends React.Component {
             value={title}
             onChange={(e) => this.update({title: e.target.value})}
             onBlur={this.touch}
-            error={touched && !title}
           />
           <Form.Select
             inline
@@ -99,7 +98,6 @@ class MovieForm extends React.Component {
             value={genres}
             onChange={(e, control) => this.update({genres: control.value})}
             onBlur={this.touch}
-            error={touched && !genres.length}
           />
           <Form.Select
             inline
@@ -108,7 +106,6 @@ class MovieForm extends React.Component {
             value={year}
             onChange={(e, control) => this.update({year: control.value})}
             onBlur={this.touch}
-            error={touched && !year}
           />
           <Form.Field inline>
             <label>Rating</label>

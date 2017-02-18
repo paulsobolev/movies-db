@@ -5,6 +5,8 @@ export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY'
 
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
+export const TOGGLE_GENERATED_MOVIES = 'TOGGLE_GENERATED_MOVIES'
+
 export const genresPreset = [
   'Action',
   'Adventure',
