@@ -10,10 +10,17 @@ function highlightQuery(string, query) {
   return string
 }
 
+const propTypes = {
+  string: React.PropTypes.string.isRequired,
+  query:  React.PropTypes.string,
+}
+
 function Highlighter({string, query, ...props}) {
   return (
     <span {...props} dangerouslySetInnerHTML={{__html: highlightQuery(string, query)}} />
   )
 }
+
+Highlighter.propTypes = propTypes
 
 export default Highlighter

@@ -12,7 +12,7 @@ function AppHeader() {
         </Header.Subheader>
       </Header.Content>
     </Header>
-  );
+  )
 }
 
 export default AppHeader

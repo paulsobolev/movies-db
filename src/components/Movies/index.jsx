@@ -1,5 +1,5 @@
 import React from 'react'
-import {Table, Input, Rating, Popup, Segment, Checkbox} from 'semantic-ui-react'
+import {Grid, Table, Input, Rating, Popup, Segment, Checkbox, Header} from 'semantic-ui-react'
 import OrderLink from '../OrderLink'
 import Highlighter from '../Highlighter'
 import Pagination from '../Pagination'
@@ -36,26 +36,32 @@ function Movies({
   return (
     <div {...props}>
       <Segment>
-        <Checkbox
-          toggle
-          label="Use preloaded data (1000 entries)"
-          checked={withGeneratedMovies}
-          onChange={toggleGeneratedMovies}
-        />
-      </Segment>
-      <Table compact>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Movies</Table.HeaderCell>
-            <Table.HeaderCell colSpan="3">
+        <Grid>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+              <Header as="h3">
+                Movies
+              </Header>
+              <Checkbox
+                toggle
+                label="Use preloaded data (1000 entries)"
+                checked={withGeneratedMovies}
+                onChange={toggleGeneratedMovies}
+              />
+            </Grid.Column>
+            <Grid.Column>
               <Popup
                 trigger={SearchField}
-                header='Movie Search'
+                positioning={'left center'}
                 content='You may search by title, genres and year'
                 on='focus'
               />
-            </Table.HeaderCell>
-          </Table.Row>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment>
+      <Table compact>
+        <Table.Header>
           <Table.Row>
             <Table.HeaderCell>
               <OrderLink field="title" orderedBy={orderBy} onClick={setOrderBy}>Title</OrderLink>
@@ -99,15 +105,17 @@ function Movies({
         <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan="4">
-              <div className="clearfix">
-                <Pagination
-                  size="tiny"
-                  floated="right"
-                  currentPage={pagination.currentPage}
-                  lastPage={pagination.lastPage}
-                  setCurrentPage={setCurrentPage}
-                />
-              </div>
+              {movies.length > 0 && (
+                <div className="clearfix">
+                  <Pagination
+                    size="tiny"
+                    floated="right"
+                    currentPage={pagination.currentPage}
+                    lastPage={pagination.lastPage}
+                    setCurrentPage={setCurrentPage}
+                  />
+                </div>
+              )}
             </Table.HeaderCell>
           </Table.Row>
         </Table.Footer>
