@@ -1,3 +1,5 @@
+import orderBy from 'lodash/orderBy'
+
 export function generateYears(max = 100) {
   const yearOptions = []
 
@@ -15,4 +17,26 @@ export function changeOrderDirection(state, field) {
     }
 
     return field
+}
+
+export function orderMoviesBy(movies, field) {
+  let reverse = field.startsWith('-')
+  if (reverse) {
+    field = field.slice(1)
+  }
+
+  let orderFunc = (movie) => {
+    switch (field) {
+      case 'genres':
+        return movie.genres.join(',')
+      default:
+        return movie[field]
+    }
+  }
+
+  if (field === 'date') {
+    reverse = !reverse
+  }
+
+  return orderBy(movies, [orderFunc], [reverse ? 'desc' : 'asc'])
 }
