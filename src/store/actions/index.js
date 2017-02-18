@@ -1,4 +1,5 @@
 import * as ActionTypes from '../constants'
+import uuid from 'uuid/v4'
 
 export function setOrderBy(field) {
   return {
@@ -11,5 +12,12 @@ export function setSearchQuery(query) {
   return {
     type: ActionTypes.SET_SEARCH_QUERY,
     query
+  }
+}
+
+export function addVideo(data) {
+  return {
+    type: ActionTypes.ADD_MOVIE,
+    data: Object.assign({}, data, {id: uuid()})
   }
 }
