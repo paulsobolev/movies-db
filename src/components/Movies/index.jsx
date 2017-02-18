@@ -1,6 +1,7 @@
 import React from 'react'
 import {Table, Menu, Icon, Input, Rating} from 'semantic-ui-react'
 import OrderLink from '../OrderLink'
+import Highlighter from '../Highlighter'
 
 const propTypes = {
   movies:         React.PropTypes.array.isRequired,
@@ -45,8 +46,12 @@ function Movies({movies = [], orderBy, setOrderBy, searchQuery, setSearchQuery, 
         <Table.Body>
           {movies.map((movie) => (
             <Table.Row key={movie.id}>
-              <Table.Cell>{movie.title}</Table.Cell>
-              <Table.Cell>{movie.genres.join(', ')}</Table.Cell>
+              <Table.Cell>
+                <Highlighter string={movie.title} query={searchQuery} />
+              </Table.Cell>
+              <Table.Cell>
+                <Highlighter string={movie.genres.join(', ')} query={searchQuery} />
+              </Table.Cell>
               <Table.Cell>{movie.year}</Table.Cell>
               <Table.Cell>
                 <Rating maxRating={5} rating={movie.rating} disabled />

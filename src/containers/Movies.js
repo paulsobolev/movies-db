@@ -2,12 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Movies from '../components/Movies'
 import {setOrderBy, setSearchQuery} from '../store/actions'
-import {orderMoviesBy} from '../utils'
+import {filterMoviesByQuery, orderMoviesBy} from '../utils'
 
 function mapStateToProps(state) {
   const {movies, orderBy, searchQuery} = state
-  const filteredMovies = movies.slice(0, 20)
-  const orderedMovies = orderMoviesBy(filteredMovies, orderBy)
+  const filteredMovies = filterMoviesByQuery(movies, searchQuery)
+  const orderedMovies = orderMoviesBy(filteredMovies.slice(0, 20), orderBy)
 
   return {
     movies:      orderedMovies,

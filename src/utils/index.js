@@ -40,3 +40,21 @@ export function orderMoviesBy(movies, field) {
 
   return orderBy(movies, [orderFunc], [reverse ? 'desc' : 'asc'])
 }
+
+export function filterMoviesByQuery(movies, query) {
+  if (!query) {
+    return movies
+  }
+
+  return movies.filter((movie) => {
+    let targets = [
+      movie.title.toLowerCase(),
+      movie.year.toString(),
+      movie.genres.join(',').toLowerCase()
+    ]
+
+    return targets.some((target) => {
+      return target.indexOf(query.toLowerCase()) !== -1
+    })
+  })
+}
